@@ -1,5 +1,4 @@
 <?php get_header(); // استدعاء ملف الهيدر ?>
-
 <!-- بانر الصفحة الرئيسية -->
 <div class="page-banner">
     <!-- صورة الخلفية الخاصة بالبانر -->
@@ -61,7 +60,7 @@
                         <a href="#">Quad Picnic Party</a>
                     </h5>
                     <p>
-                        Live music, a taco truck and more can found in our third annual quad picnic day.
+                        Live music, a taco truck and more can be found at our third annual quad picnic day.
                         <a href="#" class="nu gray">Learn more</a>
                     </p>
                 </div>
@@ -82,43 +81,31 @@
             <!-- عنوان القسم -->
             <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
 
-            <!-- التدوينة الأولى -->
-            <div class="event-summary">
+            <!-- عرض المقالات الحديثة بشكل ديناميكي -->
+            <?php
+            $homepagePosts = new WP_Query(array(
+                'posts_per_page' => 2
+            ));
 
-                <!-- التاريخ بتصميم مختلف (لون بيج) -->
-                <a class="event-summary__date event-summary__date--beige t-center" href="#">
-                    <span class="event-summary__month">Jan</span> <!-- شهر النشر -->
-                    <span class="event-summary__day">20</span> <!-- يوم النشر -->
-                </a>
-
-                <!-- محتوى التدوينة -->
-                <div class="event-summary__content">
-                    <h5 class="event-summary__title headline headline--tiny">
-                        <a href="#">We Were Voted Best School</a> <!-- عنوان التدوينة -->
-                    </h5>
-                    <p>
-                        For the 100th year in a row we are voted #1.
-                        <a href="#" class="nu gray">Read more</a> <!-- رابط لقراءة المزيد -->
-                    </p>
+            while ($homepagePosts->have_posts()) {
+                $homepagePosts->the_post(); ?>
+                <div class="event-summary">
+                    <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
+                        <span class="event-summary__month"><?php the_time('M'); ?></span>
+                        <span class="event-summary__day"><?php the_time('d'); ?></span>
+                    </a>
+                    <div class="event-summary__content">
+                        <h5 class="event-summary__title headline headline--tiny">
+                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        </h5>
+                        <p><?php echo wp_trim_words(get_the_content(), 18); ?>
+                            <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-
-            <!-- التدوينة الثانية -->
-            <div class="event-summary">
-                <a class="event-summary__date event-summary__date--beige t-center" href="#">
-                    <span class="event-summary__month">Feb</span>
-                    <span class="event-summary__day">04</span>
-                </a>
-                <div class="event-summary__content">
-                    <h5 class="event-summary__title headline headline--tiny">
-                        <a href="#">Professors in the National Spotlight</a>
-                    </h5>
-                    <p>
-                        Two of our professors have been in national news lately.
-                        <a href="#" class="nu gray">Read more</a>
-                    </p>
-                </div>
-            </div>
+            <?php }
+            wp_reset_postdata();
+            ?>
 
             <!-- زر لعرض جميع التدوينات -->
             <p class="t-center no-margin">

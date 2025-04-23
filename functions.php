@@ -17,16 +17,43 @@ function custom_files()
 
     // تحميل ملف JavaScript الرئيسي مع تحديد تبعيته لـ jQuery وتشغيله في تذييل الصفحة
     wp_enqueue_script('main-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
+
+    // إضافة متغيرات JavaScript للاستخدام في ملفات JS
+    wp_localize_script('main-js', 'customData', array(
+        'root_url' => get_site_url(),
+        'nonce' => wp_create_nonce('wp_rest')
+    ));
 }
 
 // ربط دالة تحميل الملفات بحدث wp_enqueue_scripts
 add_action('wp_enqueue_scripts', 'custom_files');
 
-// دالة لتفعيل دعم عنوان الصفحة (title-tag)
-function custom_theme()
-{
+// دالة لتفعيل المزايا المختلفة للثيم
+function custom_features() {
+    // دعم عنوان الصفحة
     add_theme_support('title-tag');
+    
+    // دعم الصور المميزة
+    add_theme_support('post-thumbnails');
+    
+    // تسجيل قوائم مخصصة
+    register_nav_menus(array(
+        'headerMenuLocation' => 'قائمة الهيدر',
+        'footerLocation1' => 'قائمة الفوتر 1',
+        'footerLocation2' => 'قائمة الفوتر 2'
+    ));
 }
 
-// تم تعديل الخطأ الإملائي في اسم الحدث من 'affter_setup_theme' إلى 'after_setup_theme'
-add_action('after_setup_theme', 'custom_theme');
+add_action('after_setup_theme', 'custom_features');
+
+// دالة لتخصيص صفحة تسجيل الدخول
+function custom_login_page() {
+    return esc_url(site_url('/login'));
+}
+add_filter('login_url', 'custom_login_page');
+
+// إعادة توجيه المستخدم بعد تسجيل الخروج
+function custom_logout_redirect() {
+    return esc_url(site_url('/'));
+}
+add_filter('logout_redirect', 'custom_logout_redirect');

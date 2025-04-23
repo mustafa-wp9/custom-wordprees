@@ -16,10 +16,10 @@ while (have_posts()) { // بدء حلقة الـ WordPress لعرض المقال
             </div>
         </div>
     </div>
+
     <!-- عرض المحتوى الرئيسي للمقال داخل صفحة محتوى مخصصة -->
     <div class="container container--narrow page-section">
         <!-- عرض رابط العودة إلى صفحة "About Us" مع أيقونة -->
-
         <?php
         $parent_id = wp_get_post_parent_id(get_the_ID());
         if ($parent_id) { ?>
@@ -49,7 +49,6 @@ while (have_posts()) { // بدء حلقة الـ WordPress لعرض المقال
                     } else {
                         $find_children_of = get_the_ID();
                     }
-
                     wp_list_pages(array(
                         'title_li' => NULL,
                         'child_of' => $find_children_of,
@@ -67,6 +66,6 @@ while (have_posts()) { // بدء حلقة الـ WordPress لعرض المقال
     </div>
     </div>
 
-<?php } // نهاية حلقة الـ while
+<?php }
 get_footer(); // جلب تذييل الصفحة (الـ Footer)
 ?>

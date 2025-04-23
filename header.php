@@ -8,7 +8,7 @@
    <?php wp_head(); ?> <!-- استدعاء ملفات CSS وJS التي تم ربطها بـ wp_enqueue (ضروري داخل الوسم <head>) -->
 </head>
 
-<body>
+<body <?php body_class();  ?>>
    <!-- بداية رأس الموقع -->
    <header class="site-header">
       <div class="container">
