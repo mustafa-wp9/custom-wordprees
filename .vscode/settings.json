@@ -1,3 +1,17 @@
 {
-  "php.stubs": ["*", "wordpress"]
+  "php.suggest.basic": true,
+  "php.validate.enable": true,
+  "php.stubs": ["*", "wordpress"],
+  "emmet.includeLanguages": {
+    "php": "html"
+  },
+  "files.associations": {
+    "*.php": "php"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+  "[php]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  }
 }
