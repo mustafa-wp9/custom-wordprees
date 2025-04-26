@@ -29,31 +29,16 @@ function custom_files()
 add_action('wp_enqueue_scripts', 'custom_files');
 
 // دالة لتفعيل المزايا المختلفة للثيم
-function custom_features() {
+function custom_features()
+{
     // دعم عنوان الصفحة
+
+    register_nav_menu('headerMenulocation', 'Header Menu location');
+    register_nav_menu('footerlocationOne', 'Footer Location One');
+    register_nav_menu('footerlocationTow', 'Footer Location Two');
     add_theme_support('title-tag');
-    
-    // دعم الصور المميزة
-    add_theme_support('post-thumbnails');
-    
-    // تسجيل قوائم مخصصة
-    register_nav_menus(array(
-        'headerMenuLocation' => 'قائمة الهيدر',
-        'footerLocation1' => 'قائمة الفوتر 1',
-        'footerLocation2' => 'قائمة الفوتر 2'
-    ));
+
 }
 
 add_action('after_setup_theme', 'custom_features');
 
-// دالة لتخصيص صفحة تسجيل الدخول
-function custom_login_page() {
-    return esc_url(site_url('/login'));
-}
-add_filter('login_url', 'custom_login_page');
-
-// إعادة توجيه المستخدم بعد تسجيل الخروج
-function custom_logout_redirect() {
-    return esc_url(site_url('/'));
-}
-add_filter('logout_redirect', 'custom_logout_redirect');

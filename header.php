@@ -8,7 +8,7 @@
    <?php wp_head(); ?> <!-- استدعاء ملفات CSS وJS التي تم ربطها بـ wp_enqueue (ضروري داخل الوسم <head>) -->
 </head>
 
-<body <?php body_class();  ?>>
+<body <?php body_class(); ?>>
    <!-- بداية رأس الموقع -->
    <header class="site-header">
       <div class="container">
@@ -30,15 +30,21 @@
             <!-- القائمة الرئيسية للموقع -->
             <div class="site-header__menu group">
                <nav class="main-navigation">
-                  <ul>
-                     <li><a href="http://custom-wordprees.local/about-us/">About Us</a></li>
+                  <?php
+                  wp_nav_menu(array(
+                     'theme_location' => 'headerMenulocation',
+                  ));
+                  ?>
+               </nav>
+               <!-- <ul>
+                     <li><a href=" <?php echo site_url('/about-us') ?>">About Us</a></li>
                      <li><a href="#">Programs</a></li>
                      <li><a href="#">Events</a></li>
                      <li><a href="#">Campuses</a></li>
                      <li><a href="#">Blog</a></li>
-                  </ul>
+                  </ul> -->
                </nav>
-
+               
                <!-- أدوات الدخول والتسجيل والبحث -->
                <div class="site-header__util">
                   <a href="#" class="btn btn--small btn--orange float-left push-right">Login</a>
