@@ -5,9 +5,21 @@ get_header(); ?>
     <div class="page-banner__bg-image"
         style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg'); ?>)"></div>
     <div class="page-banner__content container container--narrow">
-        <h1 class="page-banner__title">welcome to our blog!</h1> <!-- عرض عنوان المقال -->
+        <h1 class="page-banner__title">
+            <?php the_archive_title(); ?>
+             <?php /*
+              if (is_category()) {
+            single_cat_title();
+        }
+        if(is_author()) {
+          echo 'posts by '; the_author();
+        }*/
+         ?> 
+
+
+        </h1> <!-- عرض عنوان المقال -->
         <div class="page-banner__intro">
-            <p>keep up with our latest news.</p> <!-- مقدمة قصيرة عن المقال -->
+            <p><?php the_archive_description();?></p> <!-- مقدمة قصيرة عن المقال -->
         </div>
     </div>
 </div>
